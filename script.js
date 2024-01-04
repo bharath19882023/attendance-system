@@ -6,12 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add more date entries as needed
     };
 
-    // Sample data for user list
-    const userList = [
-        { name: 'John Doe', employeeId: 'EMP001' },
-        { name: 'Jane Smith', employeeId: 'EMP002' },
-        // Add more user entries as needed
-    ];
+    // Sample data for user list (initially retrieved from localStorage)
+    let userList = JSON.parse(localStorage.getItem('userList')) || [];
 
     // Populate employee list on page load
     const employeeListElement = document.getElementById('employee-list').querySelector('ul');
@@ -84,6 +80,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add the new user to the list
         const newUser = { name, employeeId };
         userList.push(newUser);
+
+        // Save the updated user list to localStorage
+        localStorage.setItem('userList', JSON.stringify(userList));
 
         // Update the user list on the page
         populateUserList(userListElement, userList);
